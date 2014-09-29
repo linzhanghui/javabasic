@@ -17,7 +17,7 @@ public class TestCircle {
 		System.out.println();
 		System.out.println();
 		
-		Point p1 = new Point(5.2, 6.3);
+		Point p1 = new Point(5.2, 6.4);
 		System.out.println(c1.contains(p1));
 		System.out.println(c1.contains(new Point(10.0,9.0)));
 	}
