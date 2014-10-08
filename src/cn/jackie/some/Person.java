@@ -22,7 +22,7 @@ class Person {
 		return name;
 	}
 	
-	public String getinfo()
+	public String getInfo()
 	{
 		return "Name"+name+"\n"+age+"age";
 	}
