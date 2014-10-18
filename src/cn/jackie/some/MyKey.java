@@ -8,7 +8,7 @@ public class MyKey {
 		this.name =name;
 		this.age = age;
 	}
-	/*
+	
 	public boolean equals(Object obj) {
 		if(obj instanceof MyKey)
 		{
@@ -27,7 +27,7 @@ public class MyKey {
 	public int hashCode() {
 		return name.hashCode()+age;
 	}
-	*/
+	
 	public String toString() {
 		return name + ',' +age;
 	}

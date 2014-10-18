@@ -16,5 +16,6 @@ public class HashTableTest {
 			System.out.println(key+"=");
 			System.out.println(numbers.get(key)	);
 		}
+		System.out.println(numbers.get(new MyKey("zhangsan",18)));
 	}
 }
