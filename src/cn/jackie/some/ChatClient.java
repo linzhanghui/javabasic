@@ -39,7 +39,7 @@ public class ChatClient extends Frame{
 	
 	public void connect(){
 		try{
-			Socket s = new Socket("127.0.0.1",8888);
+			s = new Socket("127.0.0.1",8888);
 System.out.println("connected");
 		} catch (UnknownHostException e){
 			e.printStackTrace();
@@ -55,6 +55,7 @@ System.out.println("connected");
 			tfTxt.setText("");
 			
 			try{
+				
 				DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 				dos.writeUTF(str);
 				dos.flush();
