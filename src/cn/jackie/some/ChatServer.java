@@ -7,17 +7,35 @@ import java.net.Socket;
 
 public class ChatServer {
 	public static void main(String[] args) {
+		boolean started = false;
+		ServerSocket ss = null;
+		Socket s = null;
+		DataInputStream dis = null;
 		try {
-			ServerSocket ss = new ServerSocket(8888);
-			while(true){
-				Socket s = ss.accept();
+			ss = new ServerSocket(8888);
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+		try{
+			started = true;
+			while(started){
+				boolean bConnected = false;
+				s = ss.accept();
 				System.out.println("a client connected！");
-				DataInputStream dis = new DataInputStream(s.getInputStream());
-				String str = dis.readUTF();
-				System.out.println(str);
+				bConnected = true;
+				dis = new DataInputStream(s.getInputStream());
+				while(bConnected){
+					String str = dis.readUTF();
+					System.out.println(str);
+				}
 				dis.close();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
+			try{
+				s.close();
+			} catch (IOException e1){
+				e1.printStackTrace();
+			}
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
