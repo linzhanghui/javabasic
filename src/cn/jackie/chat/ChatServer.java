@@ -1,6 +1,7 @@
 package cn.jackie.chat;
 
 import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.*;
 
@@ -8,23 +9,47 @@ public class ChatServer {
 	
 	public static void main(String[] args) {
 		boolean started = false;
+		ServerSocket ss = null;
+		Socket s = null;
+		DataInputStream  dis = null;
 		try {
-			ServerSocket ss = new ServerSocket(8888);
+			ss = new ServerSocket(8888);
+		} catch(BindException e){
+			System.out.println("端口使用中...");
+			System.out.println("请关掉相关程序并重新运行服务器！");
+			System.exit(0);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
 			started = true;
 			while(started){
 				boolean bConnected = false;
-				Socket s = ss.accept();
+				s = ss.accept();
 System.out.println("a client connected!");
 				bConnected = true;
-				DataInputStream dis = new DataInputStream(s.getInputStream());
+				dis = new DataInputStream(s.getInputStream());
 				while(bConnected){
 					String str = dis.readUTF();
 					System.out.println(str);
 				}
-				dis.close();
+//				dis.close();
 			} 
+		} catch (EOFException e) {
+			System.out.println("Client closed!");
 		} catch (IOException e) {
+			
 			e.printStackTrace();
+//			System.out.println("Client closed");
+		} finally {
+			try{
+				if(dis!=null) dis.close();
+				if(s !=null) s.close();
+//				s.close();
+			}catch (IOException e1){
+				e1.printStackTrace();
+			}
 		}
 	}
 	
