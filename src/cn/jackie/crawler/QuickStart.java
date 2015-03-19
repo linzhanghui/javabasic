@@ -16,6 +16,9 @@ public class QuickStart {
 			try {
 				System.out.println(response1.getStatusLine());
 				HttpEntity entity1 = response1.getEntity();
+				if(entity1 != null) {
+					System.out.println(EntityUtils.toString(entity1));
+				}
 				EntityUtils.consume(entity1);
 			} finally {
 				response1.close();
