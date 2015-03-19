@@ -11,8 +11,12 @@ public class ChatClient extends Frame{
 	Socket s = null;
 	
 	DataOutputStream dos = null;
+	DataInputStream dis = null;
+	private boolean;
+	
 	TextField tfTxt = new TextField();
 	TextArea taContent = new TextArea();
+	
 	
 	public static void main(String[] args) {
 		new ChatClient().launchFrame();
@@ -34,13 +38,16 @@ public class ChatClient extends Frame{
 		tfTxt.addActionListener(new TFListener());
 		setVisible(true);
 		connect();
+		
+		new Thread(new RecvThread);
 	}
 
 	public void connect(){
 		try{
 			s = new Socket("127.0.0.1",8888);
 			dos = new DataOutputStream(s.getOutputStream());
-		System.out.println("connected");
+			dis = new DataInputStream(s.getInputStream());
+System.out.println("connected");
 		}catch(UnknownHostException e) {
 			e.printStackTrace();
 		}catch(IOException e) {
@@ -73,6 +80,19 @@ public class ChatClient extends Frame{
 			} catch (IOException e1){
 				e1.printStackTrace();
 			}
+		}
+	}
+	
+	private class ReceiveThread implements Runnable {
+		public void run() {
+			try{
+				while(bConnected) {
+					String str = dis.readUTF();
+				taContent.setText(taContent.getText() + str +'\n');
+//				System.out.println(str);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
