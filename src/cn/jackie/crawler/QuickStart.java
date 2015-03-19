@@ -11,7 +11,7 @@ public class QuickStart {
 	public static void main(String[] args) throws Exception{
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		try {
-			HttpGet httpGet = new HttpGet("http://www.163trade.com");
+			HttpGet httpGet = new HttpGet("http://www.163trade.com/");
 			CloseableHttpResponse response1 = httpclient.execute(httpGet);
 			try {
 				System.out.println(response1.getStatusLine());
