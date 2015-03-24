@@ -14,12 +14,13 @@ public class QuickStart {
 			HttpGet httpGet = new HttpGet("http://www.163trade.com/");
 			CloseableHttpResponse response1 = httpclient.execute(httpGet);
 			try {
-				System.out.println(response1.getStatusLine());
+//				System.out.println(response1.getStatusLine());
 				HttpEntity entity1 = response1.getEntity();
 				if(entity1 != null) {
 					System.out.println(EntityUtils.toString(entity1));
 				}
-				EntityUtils.consume(entity1);
+				
+//				EntityUtils.consume(entity1);
 			} finally {
 				response1.close();
 			}
